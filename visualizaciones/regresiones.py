@@ -1,6 +1,7 @@
 import seaborn as sns
 from matplotlib import pyplot as plt
 import numpy as np
+from scipy import stats
 
 def par_real_predicho(y_test, y_pred, magnitud=""):
     # 1. Crear la cuadrícula conjunta para tener control total
@@ -33,8 +34,6 @@ def par_real_predicho(y_test, y_pred, magnitud=""):
 
     plt.tight_layout()
     # plt.show()
-
-from scipy import stats
 
 def par_real_predicho_res(y_test, y_pred, magnitud="", mostrar_normal=True):
     residuos = y_pred - y_test
@@ -88,7 +87,7 @@ def par_real_predicho_res(y_test, y_pred, magnitud="", mostrar_normal=True):
     g.ax_marg_y.grid(axis='x', alpha=0.3)
 
     if magnitud:
-        g.fig.suptitle(f'Diagnóstico de residuos: {magnitud}', fontsize=14, y=1.02)
+        g.figure.suptitle(f'Diagnóstico de residuos: {magnitud}', fontsize=14, y=1.02)
 
     plt.tight_layout()
     # plt.show()
@@ -102,7 +101,9 @@ def par_real_predicho_res(y_test, y_pred, magnitud="", mostrar_normal=True):
 
 if __name__ == "__main__":
     import pandas as pd
-    y_test = pd.Series([1, 2, 3])
-    y_pred = pd.Series([0.95, 1.87, 2.64])
-    par_real_predicho_res(y_test, y_pred, "Valores")
-    plt.savefig('regresiones.png')
+    y_test = pd.Series([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    y_pred = pd.Series([0.1, 0.95, 1.87, 2.64, 3.45, 4.2, 5.1, 6.2, 7.0, 8.9, 9.8])
+    par_real_predicho(y_test, y_pred, "Valores")
+    plt.savefig('imagenes/pares_regresiones.png')
+    par_real_predicho_res(y_test, y_pred, "Valores", mostrar_normal=True)
+    plt.savefig('imagenes/pares_regresiones_residuos.png')
